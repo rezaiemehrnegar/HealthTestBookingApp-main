@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:digi_diagnos/screens/nav_route.dart';
 import 'package:flutter/material.dart';
 import '../model/user_model.dart';
@@ -28,7 +27,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     nameController.dispose();
     emailController.dispose();
     bioController.dispose();
-    roleController.dispose();// ... (dispose other controllers)
+    roleController.dispose(); // ... (dispose other controllers)
   }
 
   // for selecting image
@@ -45,90 +44,92 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
       body: SafeArea(
         child: isLoading == true
             ? const Center(
-          child: CircularProgressIndicator(
-            color: Color(0xFF3E69FE),
-          ),
-        )
-            : SingleChildScrollView(
-          padding:
-          const EdgeInsets.symmetric(vertical: 25.0, horizontal: 5.0),
-          child: Center(
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () => selectImage(),
-                  child: image == null
-                      ? const CircleAvatar(
-                    backgroundColor: Color(0xFF3E69FE),
-                    radius: 50,
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                  )
-                      : CircleAvatar(
-                    backgroundImage: FileImage(image!),
-                    radius: 50,
-                  ),
+                child: CircularProgressIndicator(
+                  color: Color(0xFF3E69FE),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5, horizontal: 15),
-                  margin: const EdgeInsets.only(top: 20),
+              )
+            : SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25.0, horizontal: 5.0),
+                child: Center(
                   child: Column(
                     children: [
-                      // name field
-                      textFeld(
-                        hintText: "John Smith",
-                        icon: Icons.account_circle,
-                        inputType: TextInputType.name,
-                        maxLines: 1,
-                        controller: nameController,
+                      InkWell(
+                        onTap: () => selectImage(),
+                        child: image == null
+                            ? const CircleAvatar(
+                                backgroundColor: Color(0xFF3E69FE),
+                                radius: 50,
+                                child: Icon(
+                                  Icons.account_circle,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(image!),
+                                radius: 50,
+                              ),
                       ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 15,
+                        ),
+                        margin: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          children: [
+                            // name field
+                            textFeld(
+                              hintText: "John Smith",
+                              icon: Icons.account_circle,
+                              inputType: TextInputType.name,
+                              maxLines: 1,
+                              controller: nameController,
+                            ),
 
-                      // email
-                      textFeld(
-                        hintText: "abc@example.com",
-                        icon: Icons.email,
-                        inputType: TextInputType.emailAddress,
-                        maxLines: 1,
-                        controller: emailController,
-                      ),
+                            // email
+                            textFeld(
+                              hintText: "abc@example.com",
+                              icon: Icons.email,
+                              inputType: TextInputType.emailAddress,
+                              maxLines: 1,
+                              controller: emailController,
+                            ),
 
-                      // bio
-                      textFeld(
-                        hintText: "Enter your bio here...",
-                        icon: Icons.edit,
-                        inputType: TextInputType.name,
-                        maxLines: 2,
-                        controller: bioController,
-                      ),
+                            // bio
+                            textFeld(
+                              hintText: "Enter your bio here...",
+                              icon: Icons.edit,
+                              inputType: TextInputType.name,
+                              maxLines: 2,
+                              controller: bioController,
+                            ),
 
-                      textFeld(
-                        hintText: "User Role (e.g., admin, user)",
-                        icon: Icons.verified_user,
-                        inputType: TextInputType.text,
-                        maxLines: 1,
-                        controller: roleController,
+                            textFeld(
+                              hintText: "User Role (e.g., admin, user)",
+                              icon: Icons.verified_user,
+                              inputType: TextInputType.text,
+                              maxLines: 1,
+                              controller: roleController,
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.90,
+                        child: CustomButton(
+                          text: "Continue",
+                          onPressed: () => storeData(),
+                        ),
+                      )
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  child: CustomButton(
-                    text: "Continue",
-                    onPressed: () => storeData(),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }
@@ -143,7 +144,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
-        cursorColor: Color(0xFF3E69FE),
+        cursorColor: const Color(0xFF3E69FE),
         controller: controller,
         keyboardType: inputType,
         maxLines: maxLines,
@@ -152,7 +153,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color(0xFF3E69FE),
+              color: const Color(0xFF3E69FE),
             ),
             child: Icon(
               icon,
@@ -175,7 +176,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
           hintText: hintText,
           alignLabelWithHint: true,
           border: InputBorder.none,
-          fillColor: Color(0xFF3E69FE),
+          fillColor: const Color(0xFF3E69FE),
           filled: true,
         ),
       ),
@@ -193,7 +194,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
       createdAt: "",
       phoneNumber: "",
       uid: "",
-      role:roleController.text.trim(),
+      role: roleController.text.trim(),
     );
     if (image != null) {
       ap.saveUserDataToFirebase(
@@ -203,14 +204,14 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
         onSuccess: () {
           ap.saveUserDataToSP().then(
                 (value) => ap.setSignIn().then(
-                  (value) => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NavBar(),
-                  ),
-                      (route) => false),
-            ),
-          );
+                      (value) => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavBar(),
+                          ),
+                          (route) => false),
+                    ),
+              );
         },
       );
     } else {

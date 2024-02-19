@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class TestModel {
   final String id;
   final List<String> labIds; // New field to associate the test with multiple labs

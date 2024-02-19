@@ -1,14 +1,16 @@
-import 'package:digi_diagnos/screens/details.dart';
+// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
+
 import 'package:flutter/material.dart';
-import '../model/testModal.dart';
 import '../model/labModal.dart';
+import '../model/testModal.dart';
 import '../provider/auth_provider.dart';
 import 'booking.dart';
 
 class TestDetailsScreen extends StatefulWidget {
   final TestModel test;
 
-  TestDetailsScreen({
+  const TestDetailsScreen({
+    super.key,
     required this.test,
   });
 
@@ -28,7 +30,9 @@ class _TestDetailsScreenState extends State<TestDetailsScreen> {
   void fetchLabsForTest() async {
     try {
       // Assuming widget.test.labIds contains the list of lab IDs associated with the test
-      List<LabModel> fetchedLabs = await AuthProvider().fetchLabsForTest(widget.test.labIds);
+      List<LabModel> fetchedLabs = await AuthProvider().fetchLabsForTest(
+        widget.test.labIds,
+      );
 
       setState(() {
         labs = fetchedLabs;
@@ -52,19 +56,22 @@ class _TestDetailsScreenState extends State<TestDetailsScreen> {
             children: [
               Text(
                 "Description: ${widget.test.description}",
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 "Price: \$${widget.test.price}",
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 "Labs Offering this Test:",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               if (labs.isNotEmpty)
                 Column(
                   children: labs.map((lab) {
@@ -74,18 +81,21 @@ class _TestDetailsScreenState extends State<TestDetailsScreen> {
                         // Implement your book now logic here
                         // You can use lab.id, lab.name, or any other lab details
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    BookingScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BookingScreen(),
+                          ),
+                        );
                       },
                     );
                   }).toList(),
                 )
               else
-                Text(
+                const Text(
                   "No labs available for this test.", // Update with appropriate message or UI
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
             ],
           ),
@@ -99,7 +109,8 @@ class LabtestCard extends StatelessWidget {
   final LabModel lab;
   final VoidCallback onBookNowPressed;
 
-  LabtestCard({
+  const LabtestCard({
+    super.key,
     required this.lab,
     required this.onBookNowPressed,
   });
@@ -108,7 +119,7 @@ class LabtestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,30 +130,33 @@ class LabtestCard extends StatelessWidget {
             width: double.infinity,
           ),
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   lab.name,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   "Timings: ${lab.timings}",
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Text(
                   "Address: ${lab.address}",
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFF3E69FE),
+                    backgroundColor: const Color(0xFF3E69FE),
                   ),
                   onPressed: onBookNowPressed,
-                  child: Text("Book Now"),
+                  child: const Text("Book Now"),
                 ),
               ],
             ),

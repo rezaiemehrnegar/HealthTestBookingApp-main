@@ -1,8 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/auth_provider.dart';
 
 class BookingScreen extends StatefulWidget {
+  const BookingScreen({super.key});
+
   @override
   _BookingScreenState createState() => _BookingScreenState();
 }
@@ -26,7 +30,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Appointment'),
+        title: const Text('Book Appointment'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -36,12 +40,11 @@ class _BookingScreenState extends State<BookingScreen> {
             children: [
               InkWell(
                 onTap: () async {
-                  // TODO: Show calendar and update selected date
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(Duration(days: 30)),
+                    lastDate: DateTime.now().add(const Duration(days: 30)),
                   );
 
                   if (pickedDate != null && pickedDate != DateTime.now()) {
@@ -55,21 +58,21 @@ class _BookingScreenState extends State<BookingScreen> {
                   child: TextField(
                     controller: dateController,
                     readOnly: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Appointment Date',
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-              SizedBox(height: 16),
-              Text('Select Time:',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+              const SizedBox(height: 16),
+              const Text('Select Time:',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
               // Add a grid of available timings
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 10.0,
                   crossAxisSpacing: 10.0,
@@ -88,7 +91,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                         selectedTime == availableTimings[index]
-                            ? Color(0xFF3E69FE)
+                            ? const Color(0xFF3E69FE)
                             : Colors.grey,
                       ),
                     ),
@@ -96,17 +99,17 @@ class _BookingScreenState extends State<BookingScreen> {
                   );
                 },
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               TextField(
                 controller: pathologistController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Preferred Pathologist',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(12.0),
                 ),
               ),
-              SizedBox(height: 16),
-              Text('Select Gender:'),
+              const SizedBox(height: 16),
+              const Text('Select Gender:'),
               DropdownButton<String>(
                 value: selectedGender,
                 onChanged: (value) {
@@ -123,8 +126,8 @@ class _BookingScreenState extends State<BookingScreen> {
                   },
                 ).toList(),
               ),
-              SizedBox(height: 16),
-              Text('Select Payment Option:'),
+              const SizedBox(height: 16),
+              const Text('Select Payment Option:'),
               DropdownButton<String>(
                 value: selectedPaymentOption,
                 onChanged: (value) {
@@ -141,16 +144,16 @@ class _BookingScreenState extends State<BookingScreen> {
                   },
                 ).toList(),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
                   await bookAppointment(context);
                   Navigator.pop(context);
                 },
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
                 ),
-                child: Text('Book Appointment'),
+                child: const Text('Book Appointment'),
               ),
             ],
           ),
@@ -174,14 +177,14 @@ class _BookingScreenState extends State<BookingScreen> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Appointment booked successfully!'),
         ),
       );
     } catch (e) {
       print('Error booking appointment: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Error booking appointment. Please try again.'),
         ),
       );
@@ -189,14 +192,12 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   String determineAppointmentStatus() {
-    // TODO: Add logic to determine appointment status based on dates
     // For example, check if the selected date is within the next week
     // Return 'Pending' or 'Confirmed' accordingly
     return 'Pending';
   }
 
   String determinePaymentStatus() {
-    // TODO: Add logic to determine payment status based on selected payment option
     // Return 'Paid' or 'Unpaid' accordingly
     return 'Unpaid';
   }

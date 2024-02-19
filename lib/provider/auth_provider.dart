@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, use_build_context_synchronously, avoid_print, unnecessary_brace_in_string_interps
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +37,6 @@ class AuthProvider extends ChangeNotifier {
   AuthProvider() {
     checkSign();
   }
-
 
   void checkSign() async {
     final SharedPreferences s = await SharedPreferences.getInstance();
@@ -106,11 +107,10 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   // DATABASE OPERTAIONS
   Future<bool> checkExistingUser() async {
     DocumentSnapshot snapshot =
-    await _firebaseFirestore.collection("users").doc(_uid).get();
+        await _firebaseFirestore.collection("users").doc(_uid).get();
     if (snapshot.exists) {
       print("USER EXISTS");
       return true;
@@ -246,13 +246,14 @@ class AuthProvider extends ChangeNotifier {
           .get();
 
       List<BookingModel> bookings = querySnapshot.docs
-          .map((doc) => BookingModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map(
+              (doc) => BookingModel.fromMap(doc.data() as Map<String, dynamic>))
           .toList();
 
       return bookings;
     } catch (e) {
       print("Error getting bookings: $e");
-      throw e; // Re-throw the exception to propagate it to the caller
+      rethrow; // Re-throw the exception to propagate it to the caller
     }
   }
 
@@ -287,7 +288,7 @@ class AuthProvider extends ChangeNotifier {
       });
 
       final updatedBookingIndex =
-      _bookings.indexWhere((booking) => booking.id == bookingId);
+          _bookings.indexWhere((booking) => booking.id == bookingId);
       if (updatedBookingIndex != -1) {
         _bookings[updatedBookingIndex] = BookingModel(
           id: bookingId,
@@ -326,7 +327,7 @@ class AuthProvider extends ChangeNotifier {
         'email': email,
         'bio': bio,
         'profilePic': _userModel!.profilePic,
-        'role':role,
+        'role': role,
       });
 
       _userModel = UserModel(
@@ -349,7 +350,8 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> rescheduleBooking(String bookingId, String newAppointmentDate, String newAppointmentTime) async {
+  Future<void> rescheduleBooking(String bookingId, String newAppointmentDate,
+      String newAppointmentTime) async {
     try {
       await _firebaseFirestore.collection("bookings").doc(bookingId).update({
         'appointmentDate': newAppointmentDate,
@@ -361,33 +363,35 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       print("Error rescheduling appointment: $e");
-      throw e;
+      rethrow;
     }
   }
 
   Future<List<TestModel>> fetchTests() async {
     try {
-      QuerySnapshot querySnapshot = await _firebaseFirestore.collection('services').get();
+      QuerySnapshot querySnapshot =
+          await _firebaseFirestore.collection('services').get();
       _tests = querySnapshot.docs
           .map((doc) => TestModel.fromMap(doc.data() as Map<String, dynamic>))
           .toList();
       return _tests;
     } catch (e) {
       print("Error fetching tests: $e");
-      throw e;
+      rethrow;
     }
   }
 
   Future<List<LabModel>> fetchLabs() async {
     try {
-      QuerySnapshot querySnapshot = await _firebaseFirestore.collection('labs').get();
+      QuerySnapshot querySnapshot =
+          await _firebaseFirestore.collection('labs').get();
       _labs = querySnapshot.docs
           .map((doc) => LabModel.fromMap(doc.data() as Map<String, dynamic>))
           .toList();
       return _labs;
     } catch (e) {
       print("Error fetching labs: $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -403,7 +407,8 @@ class AuthProvider extends ChangeNotifier {
             .get();
 
         if (labSnapshot.exists) {
-          LabModel lab = LabModel.fromMap(labSnapshot.data() as Map<String, dynamic>);
+          LabModel lab =
+              LabModel.fromMap(labSnapshot.data() as Map<String, dynamic>);
           labs.add(lab);
         }
       }
@@ -411,7 +416,7 @@ class AuthProvider extends ChangeNotifier {
       return labs;
     } catch (e) {
       print("Error fetching labs for test: $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -428,7 +433,8 @@ class AuthProvider extends ChangeNotifier {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
         return LabTestModel(
-          testName: data['testName'] ?? '', // Adjust the field names based on your actual data model
+          testName: data['testName'] ??
+              '', // Adjust the field names based on your actual data model
           testPrice: data['testPrice'] ?? 0.0,
         );
       }).toList();
@@ -436,15 +442,15 @@ class AuthProvider extends ChangeNotifier {
       return tests;
     } catch (e) {
       print("Error fetching lab tests: $e");
-      throw e;
+      rethrow;
     }
   }
-
 
   Future<Map<String, int>> fetchTestsAndPricesForLab(String labId) async {
     try {
       // Assuming you have a 'labs' collection and each lab document has a 'tests' map field
-      DocumentSnapshot labDocument = await FirebaseFirestore.instance.collection('labs').doc(labId).get();
+      DocumentSnapshot labDocument =
+          await FirebaseFirestore.instance.collection('labs').doc(labId).get();
 
       // Check if the lab document exists
       if (!labDocument.exists) {
@@ -456,17 +462,16 @@ class AuthProvider extends ChangeNotifier {
 
       // Convert the dynamic values to int and create a map of tests and prices
       Map<String, int> testsAndPrices = testsMap.map((testName, testPrice) =>
-          MapEntry(testName, testPrice is int ? testPrice : int.parse(testPrice.toString())));
+          MapEntry(testName,
+              testPrice is int ? testPrice : int.parse(testPrice.toString())));
 
       return testsAndPrices;
     } catch (e) {
       // Handle errors, e.g., print an error message
       print('Error fetching tests and prices: $e');
-      throw e; // Rethrow the error if necessary
+      rethrow; // Rethrow the error if necessary
     }
   }
-
-
 
   Future<List<LabModel>> fetchLabsForTestService(String testServiceId) async {
     try {
@@ -476,16 +481,19 @@ class AuthProvider extends ChangeNotifier {
           .get();
 
       List<LabModel> labs = querySnapshot.docs
-          .map((doc) => LabModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map(
+            (doc) => LabModel.fromMap(
+              doc.data() as Map<String, dynamic>,
+            ),
+          )
           .toList();
 
       return labs;
     } catch (e) {
       print("Error fetching labs for test service: $e");
-      throw e;
+      rethrow;
     }
   }
-
 
   Future<void> addLabToFirestore(LabModel lab) async {
     try {
@@ -493,7 +501,7 @@ class AuthProvider extends ChangeNotifier {
       print('Lab added to Firestore: ${lab.name}');
     } catch (e) {
       print('Error adding lab to Firestore: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -503,17 +511,19 @@ class AuthProvider extends ChangeNotifier {
       print('Test added to Firestore: ${test.name}');
     } catch (e) {
       print('Error adding test to Firestore: $e');
-      throw e;
+      rethrow;
     }
   }
 
   Future<LabModel?> getLabFromFirestore(String labId) async {
     try {
       DocumentSnapshot docSnapshot =
-      await _firebaseFirestore.collection('labs').doc(labId).get();
+          await _firebaseFirestore.collection('labs').doc(labId).get();
 
       if (docSnapshot.exists) {
-        LabModel lab = LabModel.fromMap(docSnapshot.data() as Map<String, dynamic>);
+        LabModel lab = LabModel.fromMap(
+          docSnapshot.data() as Map<String, dynamic>,
+        );
         print('Lab retrieved from Firestore: ${lab.name}');
         return lab;
       } else {
@@ -522,10 +532,7 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (e) {
       print('Error getting lab from Firestore: $e');
-      throw e;
+      rethrow;
     }
   }
-
-
-
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:digi_diagnos/screens/booking.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +11,8 @@ class OffersCard extends StatelessWidget {
   final String designation;
   final String fees;
 
-  OffersCard({
+  const OffersCard({
+    super.key,
     required this.labName,
     required this.rating,
     required this.appointmentTimings,
@@ -21,14 +24,14 @@ class OffersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       elevation: 5.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -42,14 +45,14 @@ class OffersCard extends StatelessWidget {
                   children: [
                     Text(
                       labName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       designation,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontStyle: FontStyle.italic,
                         color: Colors.grey,
@@ -57,26 +60,27 @@ class OffersCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.access_time,
                           color: Colors.grey,
                           size: 16,
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
-                          "$appointmentTimings",
-                          style: TextStyle(
+                          appointmentTimings,
+                          style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
                           ),
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Icon(
                           Icons.local_offer,
-                          color: Colors.amber, // You can choose the appropriate color
+                          color: Colors
+                              .amber, // You can choose the appropriate color
                           size: 16,
                         ),
                         SizedBox(width: 4),
@@ -91,14 +95,14 @@ class OffersCard extends StatelessWidget {
                     ),
                     Text(
                       fees,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image(
@@ -110,42 +114,49 @@ class OffersCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10), // Add spacing between the content and buttons
-            Divider(), // Add a divider for better separation
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add logic for reviewing the booking
-                },
-                style: ElevatedButton.styleFrom(primary: Color(0xFF3E69FE)),
-                child: Text(
-                  'Contact Lab',
-                  style: TextStyle(color: Colors.white),
+            const SizedBox(
+                height: 10), // Add spacing between the content and buttons
+            const Divider(), // Add a divider for better separation
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Add logic for reviewing the booking
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF3E69FE),
+                  ),
+                  child: const Text(
+                    'Contact Lab',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: 16.0, // Adjust the space between buttons
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add logic for rescheduling the booking
-                  Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BookingScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(primary: Color(0xFF3E69FE)),
-                child: Text(
-                  'Make Booking',
-                  style: TextStyle(color: Colors.white),
+              Container(
+                width: 16.0, // Adjust the space between buttons
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Add logic for rescheduling the booking
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BookingScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF3E69FE),
+                  ),
+                  child: const Text(
+                    'Make Booking',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
-            ),
             ]),
           ],
         ),

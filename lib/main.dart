@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:digi_diagnos/provider/cart_provider.dart';
 import 'package:digi_diagnos/screens/welcomScreen.dart';
 import 'package:firebase_core/firebase_core.dart';

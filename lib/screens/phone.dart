@@ -46,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: 300,
                     height: 300,
                     padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
@@ -91,14 +91,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fontSize: 15,
                         color: Colors.grey.shade600,
                       ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(
+                          color: Colors.black12,
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(
+                          color: Colors.black12,
+                        ),
                       ),
                       prefixIcon: Container(
                         padding: const EdgeInsets.all(13.0),
@@ -128,29 +133,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       suffixIcon: phoneController.text.length > 9
                           ? Container(
-                        height: 30,
-                        width: 30,
-                        margin: const EdgeInsets.all(5.0),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.green,
-                        ),
-                        child: const Icon(
-                          Icons.done,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      )
+                              height: 30,
+                              width: 30,
+                              margin: const EdgeInsets.all(5.0),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.green,
+                              ),
+                              child: const Icon(
+                                Icons.done,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            )
                           : null,
                     ),
                   ),
-
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
                     child: CustomButton(
-                        text: "Login", onPressed: () => sendPhoneNumber()),
+                      text: "Login",
+                      onPressed: () => sendPhoneNumber(),
+                    ),
                   ),
                 ],
               ),
@@ -164,6 +170,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void sendPhoneNumber() {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     String phoneNumber = phoneController.text.trim();
-    ap.signInWithPhone(context, "+${selectedCountry.phoneCode}$phoneNumber");
+    ap.signInWithPhone(
+      context,
+      "+${selectedCountry.phoneCode}$phoneNumber",
+    );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, library_private_types_in_public_api, use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../model/labModal.dart';
@@ -8,7 +10,7 @@ import '../widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class AdminScreen extends StatefulWidget {
-  const AdminScreen({Key? key}) : super(key: key);
+  const AdminScreen({super.key});
 
   @override
   _AdminScreenState createState() => _AdminScreenState();
@@ -22,7 +24,6 @@ class _AdminScreenState extends State<AdminScreen> {
   final testNameController = TextEditingController();
   final testDescriptionController = TextEditingController();
   final testPriceController = TextEditingController();
-
 
   @override
   void dispose() {
@@ -50,19 +51,25 @@ class _AdminScreenState extends State<AdminScreen> {
             children: [
               TextField(
                 controller: labNameController,
-                decoration: InputDecoration(labelText: 'Lab Name'),
+                decoration: const InputDecoration(
+                  labelText: 'Lab Name',
+                ),
               ),
               TextField(
                 controller: labAddressController,
-                decoration: InputDecoration(labelText: 'Lab Address'),
+                decoration: const InputDecoration(
+                  labelText: 'Lab Address',
+                ),
               ),
               TextField(
                 controller: labTestsController,
-                decoration: InputDecoration(labelText: 'Lab Tests (comma-separated)'),
+                decoration: const InputDecoration(
+                  labelText: 'Lab Tests (comma-separated)',
+                ),
               ),
               TextField(
                 controller: labTimingsController,
-                decoration: InputDecoration(labelText: 'Lab Timings'),
+                decoration: const InputDecoration(labelText: 'Lab Timings'),
               ),
               const SizedBox(height: 20),
               CustomButton(
@@ -73,15 +80,16 @@ class _AdminScreenState extends State<AdminScreen> {
               // Add UI for adding tests
               TextField(
                 controller: testNameController,
-                decoration: InputDecoration(labelText: 'Test Name'),
+                decoration: const InputDecoration(labelText: 'Test Name'),
               ),
               TextField(
                 controller: testDescriptionController,
-                decoration: InputDecoration(labelText: 'Test Description'),
+                decoration:
+                    const InputDecoration(labelText: 'Test Description'),
               ),
               TextField(
                 controller: testPriceController,
-                decoration: InputDecoration(labelText: 'Test Price'),
+                decoration: const InputDecoration(labelText: 'Test Price'),
               ),
               const SizedBox(height: 20),
               CustomButton(
@@ -94,6 +102,7 @@ class _AdminScreenState extends State<AdminScreen> {
       ),
     );
   }
+
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   void addTest() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -110,7 +119,10 @@ class _AdminScreenState extends State<AdminScreen> {
 
       // Add the test to each lab
       TestModel test = TestModel(
-        id: _firebaseFirestore.collection('services').doc().id, // You might want to generate a unique ID here
+        id: _firebaseFirestore
+            .collection('services')
+            .doc()
+            .id, // You might want to generate a unique ID here
         labIds: labIds,
         name: testName,
         description: testDescriptionController.text.trim(),
@@ -119,7 +131,10 @@ class _AdminScreenState extends State<AdminScreen> {
 
       await authProvider.addTestToFirestore(test);
 
-      showSnackBar(context, 'Test added successfully to selected labs!');
+      showSnackBar(
+        context,
+        'Test added successfully to selected labs!',
+      );
       // Clear the text controllers after adding the test
       testNameController.clear();
       testDescriptionController.clear();
@@ -129,15 +144,19 @@ class _AdminScreenState extends State<AdminScreen> {
     }
   }
 
-
   void addLab() {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     // Extracting tests from the comma-separated string
-    List<LabTestModel> testsList = labTestsController.text.split(',').map((test) {
+    List<LabTestModel> testsList =
+        labTestsController.text.split(',').map((test) {
       var parts = test.split(':');
       return LabTestModel(
-          testName: parts[0].trim(), testPrice: double.parse(parts[1].trim()));
+        testName: parts[0].trim(),
+        testPrice: double.parse(
+          parts[1].trim(),
+        ),
+      );
     }).toList();
 
     LabModel lab = LabModel(

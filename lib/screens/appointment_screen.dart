@@ -1,15 +1,25 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/auth_provider.dart';
 import '../model/booking_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 class AllBookingsScreen extends StatelessWidget {
+  const AllBookingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Bookings',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+        title: const Text(
+          'All Bookings',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
@@ -17,11 +27,11 @@ class AllBookingsScreen extends StatelessWidget {
             future: authProvider.getBookings(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-                return Center(child: Text('No bookings available.'));
+                return const Center(child: Text('No bookings available.'));
               } else {
                 List<BookingModel> bookings = snapshot.data!;
 
@@ -43,17 +53,16 @@ class AllBookingsScreen extends StatelessWidget {
 class BookingCard extends StatelessWidget {
   final BookingModel booking;
 
-  const BookingCard({Key? key, required this.booking}) : super(key: key);
+  const BookingCard({super.key, required this.booking});
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Card(
-        margin: EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
         elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -73,22 +82,22 @@ class BookingCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Lab Name:',
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Lab Speciality:',
                           style: TextStyle(
                             fontSize: 14.0,
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(height: 8.0),
-                        Text(
+                        const SizedBox(height: 8.0),
+                        const Text(
                           'Preferred Pathologist:',
                           style: TextStyle(
                             fontSize: 14.0,
@@ -96,8 +105,8 @@ class BookingCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${booking.preferredPathologist}',
-                          style: TextStyle(
+                          booking.preferredPathologist,
+                          style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -111,14 +120,14 @@ class BookingCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Appointment Date:',
                           style: TextStyle(
                             fontSize: 16.0,
@@ -126,8 +135,8 @@ class BookingCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${booking.appointmentDate}',
-                          style: TextStyle(
+                          booking.appointmentDate,
+                          style: const TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF3E69FE),
@@ -138,7 +147,7 @@ class BookingCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Appointment Time:',
                           style: TextStyle(
                             fontSize: 16.0,
@@ -146,8 +155,8 @@ class BookingCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${booking.appointmentTime}',
-                          style: TextStyle(
+                          booking.appointmentTime,
+                          style: const TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF3E69FE),
@@ -157,21 +166,21 @@ class BookingCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Text(
                   'Status: ${booking.appointmentStatus}',
-                  style: TextStyle(fontSize: 14.0),
+                  style: const TextStyle(fontSize: 14.0),
                 ),
                 Text(
                   'Payment Status: ${booking.paymentStatus}',
-                  style: TextStyle(fontSize: 14.0),
+                  style: const TextStyle(fontSize: 14.0),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Container(
                   height: 1.0,
                   width: double.infinity,
                   color: Colors.white, // Adjust the color as needed
-                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -187,8 +196,10 @@ class BookingCard extends StatelessWidget {
                             },
                           );
                         },
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF3E69FE)),
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF3E69FE),
+                        ),
+                        child: const Text(
                           'Review',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -202,10 +213,14 @@ class BookingCard extends StatelessWidget {
                         onPressed: () {
                           // Add logic for rescheduling the booking
                         },
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF3E69FE)),
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF3E69FE),
+                        ),
+                        child: const Text(
                           'Reschedule',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -213,27 +228,30 @@ class BookingCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text('Delete Booking'),
-                                  content: Text('Are you sure you want to delete this booking?'),
+                                  title: const Text('Delete Booking'),
+                                  content: const Text(
+                                    'Are you sure you want to delete this booking?',
+                                  ),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('Cancel'),
+                                      child: const Text('Cancel'),
                                     ),
                                     TextButton(
                                       onPressed: () async {
-                                        await authProvider.deleteBooking(booking.id);
+                                        await authProvider
+                                            .deleteBooking(booking.id);
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('Delete'),
+                                      child: const Text('Delete'),
                                     ),
                                   ],
                                 );
@@ -258,31 +276,34 @@ class BookingCard extends StatelessWidget {
 class FeedbackForm extends StatelessWidget {
   final BookingModel booking;
 
-  const FeedbackForm({Key? key, required this.booking}) : super(key: key);
+  const FeedbackForm({super.key, required this.booking});
 
   @override
   Widget build(BuildContext context) {
     double rating = 0;
 
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Review Appointment',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Add a TextField for entering feedback
-          TextField(
+          const TextField(
             maxLines: 3,
             decoration: InputDecoration(
               labelText: 'Feedback',
               border: OutlineInputBorder(),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Add a RatingBar for rating the appointment
           RatingBar.builder(
             initialRating: rating,
@@ -291,7 +312,7 @@ class FeedbackForm extends StatelessWidget {
             allowHalfRating: true,
             itemCount: 5,
             itemSize: 30.0,
-            itemBuilder: (context, _) => Icon(
+            itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
             ),
@@ -299,7 +320,7 @@ class FeedbackForm extends StatelessWidget {
               rating = value;
             },
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: () {
               // Add logic to submit the feedback and rating
@@ -308,8 +329,10 @@ class FeedbackForm extends StatelessWidget {
               // Close the modal bottom sheet
               Navigator.of(context).pop();
             },
-            style: ElevatedButton.styleFrom(primary: Color(0xFF3E69FE)),
-            child: Text(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF3E69FE),
+            ),
+            child: const Text(
               'Submit Review',
               style: TextStyle(color: Colors.white),
             ),

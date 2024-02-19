@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../model/labModal.dart';
 import '../provider/cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
   final CartProvider cartProvider;
 
-  CartScreen({
+  const CartScreen({
+    super.key,
     required this.cartProvider,
   });
 
@@ -16,7 +16,7 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        title: const Text('Cart'),
       ),
       body: Column(
         children: [
@@ -28,14 +28,15 @@ class CartScreen extends StatelessWidget {
 
                 return Card(
                   elevation: 3,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
                     title: Text(test.testName),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('\$${test.testPrice.toString()}'),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -45,14 +46,14 @@ class CartScreen extends StatelessWidget {
                                   onPressed: () {
                                     cartProvider.incrementItem(test);
                                   },
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                 ),
                                 Text('${cartProvider.getItemCount(test)}'),
                                 IconButton(
                                   onPressed: () {
                                     cartProvider.decrementItem(test);
                                   },
-                                  icon: Icon(Icons.remove),
+                                  icon: const Icon(Icons.remove),
                                 ),
                               ],
                             ),
@@ -65,12 +66,12 @@ class CartScreen extends StatelessWidget {
               },
             ),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(labelText: 'Enter Coupon Code'),
                   ),
@@ -81,13 +82,13 @@ class CartScreen extends StatelessWidget {
                         'YOUR_COUPON_CODE'; // Replace with actual coupon code
                     cartProvider.applyCoupon(couponCode);
                   },
-                  child: Text('Apply Coupon'),
+                  child: const Text('Apply Coupon'),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 8),
-          Divider(),
+          const SizedBox(height: 8),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -95,7 +96,10 @@ class CartScreen extends StatelessWidget {
               children: [
                 Text(
                   'Total Amount: \$${totalAmount.toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -105,7 +109,8 @@ class CartScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Assuming you have a function to process the payment
-                bool paymentSuccessful = processPayment(cartProvider.getTotalAmount());
+                bool paymentSuccessful =
+                    processPayment(cartProvider.getTotalAmount());
 
                 if (paymentSuccessful) {
                   // Show a success message or navigate to a success screen
@@ -118,17 +123,15 @@ class CartScreen extends StatelessWidget {
                   showErrorDialog(context);
                 }
               },
-              child: Text('Proceed to Payment'),
+              child: const Text('Proceed to Payment'),
             ),
-
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
   }
 }
-
 
 bool processPayment(double totalAmount) {
   // Replace this with your actual payment processing logic
@@ -142,14 +145,14 @@ void showSuccessDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Payment Successful'),
-        content: Text('Thank you for your purchase!'),
+        title: const Text('Payment Successful'),
+        content: const Text('Thank you for your purchase!'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       );
@@ -162,14 +165,16 @@ void showErrorDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Payment Error'),
-        content: Text('There was an error processing your payment. Please try again.'),
+        title: const Text('Payment Error'),
+        content: const Text(
+          'There was an error processing your payment. Please try again.',
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       );

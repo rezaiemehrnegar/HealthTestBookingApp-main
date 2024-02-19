@@ -8,7 +8,8 @@ class LabDetailPage extends StatelessWidget {
   final LabModel lab;
   final AuthProvider authProvider;
 
-  LabDetailPage({
+  const LabDetailPage({
+    super.key,
     required this.lab,
     required this.authProvider,
   });
@@ -24,9 +25,11 @@ class LabDetailPage extends StatelessWidget {
         children: [
           Container(
             height: 220,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF3E69FE),
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(40),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -44,14 +47,28 @@ class LabDetailPage extends StatelessWidget {
                       children: [
                         Text(
                           lab.name,
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         Text(
                           "Timings: ${lab.timings}",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
                         ),
-                        Text("Address: ${lab.address}", style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.grey)),
-                        SizedBox(height: 10),
+                        Text(
+                          "Address: ${lab.address}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
@@ -59,18 +76,21 @@ class LabDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
-          SizedBox(height: 10),
+          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Available Tests:",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Wrap the Column with SingleChildScrollView and set scroll direction to horizontal
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -78,10 +98,12 @@ class LabDetailPage extends StatelessWidget {
                     children: [
                       for (LabTestModel test in lab.tests)
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 10),
                           child: Consumer<CartProvider>(
                             builder: (context, cartProvider, child) {
-                              bool isInCart = cartProvider.isInCart(test); // Check if the item is in the cart
+                              bool isInCart = cartProvider.isInCart(
+                                  test); // Check if the item is in the cart
 
                               return Container(
                                 width: 150, // Set a fixed width for each card
@@ -93,38 +115,47 @@ class LabDetailPage extends StatelessWidget {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 1,
                                       blurRadius: 5,
-                                      offset: Offset(0, 3),
+                                      offset: const Offset(0, 3),
                                     ),
                                   ],
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                  Text(
-                                  test.testName,
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
+                                    Text(
+                                      test.testName,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '\$${test.testPrice.toString()}',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        if (isInCart) {
+                                          // If the item is in the cart, remove it
+                                          // cartProvider.removeFromCart(test);
+                                        } else {
+                                          // If the item is not in the cart, add it
+                                          cartProvider.addToCart(test);
+                                        }
+                                      },
+                                      // ... existing code
+                                      child: Text(isInCart
+                                          ? 'Remove from Cart'
+                                          : 'Add to Cart'),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(height: 8),
-                                Text(
-                                  '\$${test.testPrice.toString()}',
-                                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                                ),
-                                SizedBox(height: 8),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (isInCart) {
-                                      // If the item is in the cart, remove it
-                                      // cartProvider.removeFromCart(test);
-                                    } else {
-                                      // If the item is not in the cart, add it
-                                      cartProvider.addToCart(test);
-                                    }
-                                  },
-                                  // ... existing code
-                                  child: Text(isInCart ? 'Remove from Cart' : 'Add to Cart'),
-                                ),
-                              ],),
                               );
                             },
                           ),

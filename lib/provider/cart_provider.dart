@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../model/labModal.dart';
 
 class CartProvider with ChangeNotifier {
-  List<LabTestModel> _cartItems = [];
+  final List<LabTestModel> _cartItems = [];
   String? _appliedCoupon;
   double _totalAmount = 0.0;
-  Map<LabTestModel, int> _itemQuantities = {};
+  final Map<LabTestModel, int> _itemQuantities = {};
 
   List<LabTestModel> get cartItems => _cartItems;
   String? get appliedCoupon => _appliedCoupon;

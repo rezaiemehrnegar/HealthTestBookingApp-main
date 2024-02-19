@@ -1,9 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:digi_diagnos/screens/phone.dart';
 import 'package:flutter/material.dart';
 import '../provider/auth_provider.dart';
 import '../widgets/custom_button.dart';
 import 'package:provider/provider.dart';
-
 import 'nav_route.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -57,12 +58,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       if (ap.isSignedIn == true) {
                         await ap.getDataFromSP().whenComplete(
                               () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const NavBar(),
-                            ),
-                          ),
-                        );
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const NavBar(),
+                                ),
+                              ),
+                            );
                       } else {
                         Navigator.pushReplacement(
                           context,
