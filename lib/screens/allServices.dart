@@ -1,31 +1,35 @@
+// ignore_for_file: avoid_print, file_names
+
 import 'package:digi_diagnos/screens/testDetails.dart';
 import 'package:flutter/material.dart';
 import '../model/testModal.dart'; // Replace with the actual import path
 import '../provider/auth_provider.dart';
-import 'allLabs.dart'; // Replace with the actual import path
+// Replace with the actual import path
 
 class AllTestsScreen extends StatelessWidget {
   final AuthProvider testProvider = AuthProvider();
+
+  AllTestsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Tests'),
+        title: const Text('All Tests'),
       ),
       body: FutureBuilder<List<TestModel>>(
         future: testProvider.fetchTests(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
             return Center(
               child: Text("Error: ${snapshot.error}"),
             );
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty ?? true) {
-            return Center(
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
               child: Text("No tests available."),
             );
           } else {
@@ -39,14 +43,14 @@ class AllTestsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
                     title: Text(test.name),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Description: ${test.description}'),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -62,12 +66,12 @@ class AllTestsScreen extends StatelessWidget {
                                             TestDetailsScreen(test: test)));
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF3E69FE),
+                                backgroundColor: const Color(0xFF3E69FE),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: Text('Book Now'),
+                              child: const Text('Book Now'),
                             ),
                           ],
                         ),
