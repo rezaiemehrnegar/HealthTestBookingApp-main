@@ -38,10 +38,11 @@ class MyApp extends StatelessWidget {
         title: "Health_Diagnose",
         theme: ThemeData(
           primaryColor: Color(0xFF3E69FE), // Set the primary color
-          textTheme: GoogleFonts.openSansTextTheme(), // Set the font using Google Fonts
-    appBarTheme: AppBarTheme(
-    color: Color(0xFF3E69FE), // Set the appbar background colo
-    ),
+          textTheme: GoogleFonts
+              .openSansTextTheme(), // Set the font using Google Fonts
+          appBarTheme: AppBarTheme(
+            color: Color(0xFF3E69FE), // Set the appbar background colo
+          ),
         ),
       ),
     );

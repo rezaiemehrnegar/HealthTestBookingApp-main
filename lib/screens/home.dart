@@ -3,9 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:digi_diagnos/screens/testDetails.dart';
-
 import '../model/labModal.dart';
 import '../model/testModal.dart';
 import '../provider/auth_provider.dart';
@@ -156,9 +154,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.home),
-                      SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: 8),
                       Text(
                         'Home',
                         style: TextStyle(
@@ -182,9 +178,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.search_rounded),
-                      SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: 8),
                       Text(
                         'Search',
                         style: TextStyle(
@@ -208,9 +202,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.book_rounded),
-                      SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: 8),
                       Text(
                         'Blogs',
                         style: TextStyle(
@@ -260,9 +252,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.percent_sharp),
-                      SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: 8),
                       Text(
                         'Offers',
                         style: TextStyle(
@@ -312,9 +302,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.contact_phone),
-                      SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: 8),
                       Text(
                         'Contact Us',
                         style: TextStyle(
@@ -346,7 +334,9 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 25,
-                    backgroundImage: AssetImage("assets/images/doctor1.jpg"),
+                    backgroundImage: AssetImage(
+                      "assets/images/doctor1.jpg",
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -427,9 +417,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                      width:
-                          10), // Add spacing between search bar and filter icon
+                  const SizedBox(width: 10),
                   IconButton(
                     icon: const Icon(Icons.filter_list),
                     onPressed: () {
@@ -461,7 +449,8 @@ class HomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AllTestsScreen()),
+                              builder: (context) => AllTestsScreen(),
+                            ),
                           );
                         },
                         style: ButtonStyle(
@@ -614,8 +603,7 @@ class HomeScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20), // Set a circular border radius
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all(
@@ -677,9 +665,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
@@ -700,8 +686,7 @@ class HomeScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20), // Set a circular border radius
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           foregroundColor:
@@ -747,17 +732,14 @@ class HomeScreen extends StatelessWidget {
                               width: 80, // Adjust the width as needed
                               height: 60, // Adjust the height as needed
                             ),
-                            const SizedBox(
-                                height:
-                                    2), // Add spacing between image and text
+                            const SizedBox(height: 2),
                             Expanded(
                               child: Text(
                                 packages[index],
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors
-                                      .black, // Set the text color to black
+                                  color: Colors.black,
                                 ),
                                 textAlign: TextAlign.center,
                                 softWrap: true,
@@ -792,8 +774,7 @@ class HomeScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20), // Set a circular border radius
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           foregroundColor:
@@ -838,9 +819,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 60, // Adjust the width as needed
                                 height: 60, // Adjust the height as needed
                               ),
-                              const SizedBox(
-                                  height:
-                                      5), // Add spacing between image and text
+                              const SizedBox(height: 5),
                               Text(
                                 tests[index],
                                 style: const TextStyle(
@@ -874,15 +853,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                         style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    20), // Set a circular border radius
-                              ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            foregroundColor:
-                                MaterialStateProperty.all(Colors.black)),
+                          ),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.black),
+                        ),
                         onPressed: () {
                           // Add action to "See All" button
                         },
@@ -966,8 +945,7 @@ class HomeScreen extends StatelessWidget {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    20), // Set a circular border radius
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
                             foregroundColor:

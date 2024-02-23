@@ -60,7 +60,10 @@ class LabCard extends StatelessWidget {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.star, color: Colors.yellow),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
                     Text("4.5"),
                   ],
                 ),

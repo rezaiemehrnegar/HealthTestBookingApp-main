@@ -34,7 +34,6 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
   void removeFromCart(LabTestModel test) {
     if (_itemQuantities.containsKey(test)) {
       _itemQuantities[test] = _itemQuantities[test]! - 1;

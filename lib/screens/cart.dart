@@ -48,7 +48,9 @@ class CartScreen extends StatelessWidget {
                                   },
                                   icon: const Icon(Icons.add),
                                 ),
-                                Text('${cartProvider.getItemCount(test)}'),
+                                Text(
+                                  '${cartProvider.getItemCount(test)}',
+                                ),
                                 IconButton(
                                   onPressed: () {
                                     cartProvider.decrementItem(test);
@@ -73,7 +75,9 @@ class CartScreen extends StatelessWidget {
               children: [
                 const Expanded(
                   child: TextField(
-                    decoration: InputDecoration(labelText: 'Enter Coupon Code'),
+                    decoration: InputDecoration(
+                      labelText: 'Enter Coupon Code',
+                    ),
                   ),
                 ),
                 ElevatedButton(
@@ -109,8 +113,9 @@ class CartScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Assuming you have a function to process the payment
-                bool paymentSuccessful =
-                    processPayment(cartProvider.getTotalAmount());
+                bool paymentSuccessful = processPayment(
+                  cartProvider.getTotalAmount(),
+                );
 
                 if (paymentSuccessful) {
                   // Show a success message or navigate to a success screen

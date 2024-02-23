@@ -69,7 +69,9 @@ class _AdminScreenState extends State<AdminScreen> {
               ),
               TextField(
                 controller: labTimingsController,
-                decoration: const InputDecoration(labelText: 'Lab Timings'),
+                decoration: const InputDecoration(
+                  labelText: 'Lab Timings',
+                ),
               ),
               const SizedBox(height: 20),
               CustomButton(
@@ -80,16 +82,21 @@ class _AdminScreenState extends State<AdminScreen> {
               // Add UI for adding tests
               TextField(
                 controller: testNameController,
-                decoration: const InputDecoration(labelText: 'Test Name'),
+                decoration: const InputDecoration(
+                  labelText: 'Test Name',
+                ),
               ),
               TextField(
                 controller: testDescriptionController,
-                decoration:
-                    const InputDecoration(labelText: 'Test Description'),
+                decoration: const InputDecoration(
+                  labelText: 'Test Description',
+                ),
               ),
               TextField(
                 controller: testPriceController,
-                decoration: const InputDecoration(labelText: 'Test Price'),
+                decoration: const InputDecoration(
+                  labelText: 'Test Price',
+                ),
               ),
               const SizedBox(height: 20),
               CustomButton(

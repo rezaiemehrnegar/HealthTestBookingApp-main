@@ -29,16 +29,26 @@ class AllBookingsScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
+                return Center(
+                  child: Text(
+                    'Error: ${snapshot.error}',
+                  ),
+                );
               } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No bookings available.'));
+                return const Center(
+                  child: Text(
+                    'No bookings available.',
+                  ),
+                );
               } else {
                 List<BookingModel> bookings = snapshot.data!;
 
                 return ListView.builder(
                   itemCount: bookings.length,
                   itemBuilder: (context, index) {
-                    return BookingCard(booking: bookings[index]);
+                    return BookingCard(
+                      booking: bookings[index],
+                    );
                   },
                 );
               }
@@ -334,7 +344,9 @@ class FeedbackForm extends StatelessWidget {
             ),
             child: const Text(
               'Submit Review',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ],

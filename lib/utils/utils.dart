@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,7 +21,10 @@ Future<File?> pickImage(BuildContext context) async {
       image = File(pickedImage.path);
     }
   } catch (e) {
-    showSnackBar(context, e.toString());
+    showSnackBar(
+      context,
+      e.toString(),
+    );
   }
 
   return image;

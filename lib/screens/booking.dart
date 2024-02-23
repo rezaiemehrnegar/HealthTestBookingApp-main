@@ -44,13 +44,15 @@ class _BookingScreenState extends State<BookingScreen> {
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 30)),
+                    lastDate: DateTime.now().add(
+                      const Duration(days: 30),
+                    ),
                   );
 
                   if (pickedDate != null && pickedDate != DateTime.now()) {
                     setState(() {
                       dateController.text =
-                      "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                          "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
                     });
                   }
                 },
@@ -68,9 +70,17 @@ class _BookingScreenState extends State<BookingScreen> {
               const SizedBox(height: 16),
 
               const SizedBox(height: 16),
-              const Text('Select Time:',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+              const Text(
+                'Select Time:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               // Add a grid of available timings
-              const SizedBox(height: 5,),
+              const SizedBox(
+                height: 5,
+              ),
               GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
@@ -95,11 +105,15 @@ class _BookingScreenState extends State<BookingScreen> {
                             : Colors.grey,
                       ),
                     ),
-                    child: Text(availableTimings[index]),
+                    child: Text(
+                      availableTimings[index],
+                    ),
                   );
                 },
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               TextField(
                 controller: pathologistController,
                 decoration: const InputDecoration(
@@ -117,8 +131,9 @@ class _BookingScreenState extends State<BookingScreen> {
                     selectedGender = value!;
                   });
                 },
-                items: ['Male', 'Female', 'Others'].map<DropdownMenuItem<String>>(
-                      (String value) {
+                items:
+                    ['Male', 'Female', 'Others'].map<DropdownMenuItem<String>>(
+                  (String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -135,8 +150,9 @@ class _BookingScreenState extends State<BookingScreen> {
                     selectedPaymentOption = value!;
                   });
                 },
-                items: ['Cash', 'Credit Card', 'Debit Card'].map<DropdownMenuItem<String>>(
-                      (String value) {
+                items: ['Cash', 'Credit Card', 'Debit Card']
+                    .map<DropdownMenuItem<String>>(
+                  (String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -151,7 +167,9 @@ class _BookingScreenState extends State<BookingScreen> {
                   Navigator.pop(context);
                 },
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.all(16.0),
+                  ),
                 ),
                 child: const Text('Book Appointment'),
               ),
@@ -164,7 +182,7 @@ class _BookingScreenState extends State<BookingScreen> {
 
   Future<void> bookAppointment(BuildContext context) async {
     final AuthProvider authProvider =
-    Provider.of<AuthProvider>(context, listen: false);
+        Provider.of<AuthProvider>(context, listen: false);
 
     try {
       await authProvider.bookAppointment(
@@ -202,4 +220,3 @@ class _BookingScreenState extends State<BookingScreen> {
     return 'Unpaid';
   }
 }
-

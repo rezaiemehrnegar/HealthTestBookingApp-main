@@ -25,7 +25,9 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (authProvider.isLoading)
-                    const Center(child: CircularProgressIndicator())
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    )
                   else if (authProvider.isSignedIn)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,13 +82,16 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: () {
                               // Navigate to the developer screen
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const AdminScreen(),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const AdminScreen(),
+                                ),
+                              );
                             },
-                            child: const Text('Go to Developer Screen'),
+                            child: const Text(
+                              'Go to Developer Screen',
+                            ),
                           ),
                         // Add a decorative button with the logic
                         ElevatedButton(
@@ -125,7 +130,9 @@ class ProfileScreen extends StatelessWidget {
 
                           await authProvider.getDataFromFirestore();
                         },
-                        child: const Text('Load Data from Firestore'),
+                        child: const Text(
+                          'Load Data from Firestore',
+                        ),
                       ),
                     ),
                   const SizedBox(

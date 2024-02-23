@@ -40,7 +40,7 @@ class UserModel {
       "email": email,
       "uid": uid,
       "bio": bio,
-      "role":role,
+      "role": role,
       "profilePic": profilePic,
       "phoneNumber": phoneNumber,
       "createdAt": createdAt,

@@ -43,7 +43,8 @@ class AllTestsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 5,
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
                     title: Text(test.name),
                     subtitle: Column(
@@ -54,16 +55,22 @@ class AllTestsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Price: \$${test.price.toString()}'),
+                            Text(
+                              'Price: \$${test.price.toString()}',
+                            ),
                             ElevatedButton(
                               onPressed: () {
                                 // Add booking logic
-                                print('Book Now: ${test.name}');
+                                print(
+                                  'Book Now: ${test.name}',
+                                );
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TestDetailsScreen(test: test)));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TestDetailsScreen(test: test),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF3E69FE),

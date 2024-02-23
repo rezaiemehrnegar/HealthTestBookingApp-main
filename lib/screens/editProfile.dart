@@ -99,7 +99,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Full Name'),
+                  decoration: const InputDecoration(
+                    labelText: 'Full Name',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your full name';
@@ -108,7 +110,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Username'),
+                  decoration: const InputDecoration(
+                    labelText: 'Username',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your username';
@@ -117,7 +121,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                  ),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||

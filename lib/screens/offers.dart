@@ -46,7 +46,9 @@ class SpecialOffers extends StatelessWidget {
                 designation: "Senior Surgeon",
                 fees: "Fees: 12 Dollars",
                 appointmentTimings: "8:00 AM - 5:00",
-                image: AssetImage("assets/images/doctor2.jpg"),
+                image: AssetImage(
+                  "assets/images/doctor2.jpg",
+                ),
               ),
             ),
             Padding(

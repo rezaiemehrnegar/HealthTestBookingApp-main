@@ -74,10 +74,13 @@ class _NavBarState extends State<NavBar> {
         onPressed: () {
           // Add navigation logic to go to the cart screen
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CartScreen(cartProvider: cartProvider),
-              ));
+            context,
+            MaterialPageRoute(
+              builder: (context) => CartScreen(
+                cartProvider: cartProvider,
+              ),
+            ),
+          );
         },
         backgroundColor: const Color(0xFF3E69FE),
         child: const Icon(
